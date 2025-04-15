@@ -1,0 +1,54 @@
+openapi: 3.0.1
+info:
+  title: Esu Fate Symbolic Logger
+  description: API for storing and analyzing symbolic fate patterns and odù recursions.
+  version: "1.0.0"
+servers:
+  - url: https://your-api-domain.com
+paths:
+  /log_session:
+    post:
+      summary: Log a symbolic session and check for recursion
+      operationId: logSymbolicFateSession
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                input_text:
+                  type: string
+                odu:
+                  type: string
+                symbol_tags:
+                  type: array
+                  items:
+                    type: string
+                entropy:
+                  type: number
+                recursion:
+                  type: integer
+                ebo_status:
+                  type: string
+                  enum: [none, partial, complete]
+                delay:
+                  type: number
+                resolved:
+                  type: boolean
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  recursion_alert:
+                    type: boolean
+                  repeats:
+                    type: integer
